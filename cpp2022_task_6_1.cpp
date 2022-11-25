@@ -1,4 +1,3 @@
-#include <iostream>
 #include <type_traits>
 
 template <char ...c> struct TString { };
