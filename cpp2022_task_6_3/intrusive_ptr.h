@@ -82,17 +82,17 @@ public:
     }
     TIntrusivePtr(const TIntrusivePtr& rhs) {
         this->ptr_ = rhs.Get();
-        if (this->ptr_ != nullptr) {
+        if (this->ptr_) {
             this->ptr_->AddRef();
         }
     }
     TIntrusivePtr(TIntrusivePtr&& rhs) {
         this->ptr_ = rhs.Get();
-        rhs->ptr_ = nullptr;
+        rhs.ptr_ = nullptr;
     }
 
     void Release() {
-        if (this->ptr_ != nullptr) {
+        if (this->ptr_) {
             this->ptr_->ReleaseRef();
             if (this->ptr_->RefCount() == 0) {
                 delete this->ptr_;
@@ -104,7 +104,7 @@ public:
     TIntrusivePtr& operator=(const TIntrusivePtr& rhs) {
         Release();
         this->ptr_ = rhs.Get();
-        if (this->ptr_ != nullptr) {
+        if (this->ptr_) {
             this->ptr_->AddRef();
         }
         return *this;
