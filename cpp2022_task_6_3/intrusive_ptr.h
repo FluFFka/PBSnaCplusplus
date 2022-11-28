@@ -110,6 +110,7 @@ public:
         return *this;
     }
     TIntrusivePtr& operator=(TIntrusivePtr&& rhs) {
+        Release();
         this->ptr_ = rhs.Get();
         rhs.ptr_ = nullptr;
         return *this;
@@ -133,6 +134,7 @@ public:
         }
     }
     void Reset(TIntrusivePtr&& p) {
+        Release();
         this->ptr_ = p.Get();
         p.ptr_ = nullptr;
     }
